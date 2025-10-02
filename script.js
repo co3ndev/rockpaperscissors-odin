@@ -1,56 +1,30 @@
 console.log("Javascript Initalized Successfully");
 
-function computerPlay() {
-    const choices = ["rock", "paper", "scissors"];
-    const randomIndex = Math.floor(Math.random() * choices.length);
-    return choices[randomIndex];
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function playRound(playerSelection, computerSelection) {
-    if (!["rock", "paper", "scissors"].includes(playerSelection)) {
-        return "Invalid choice! Please select rock, paper, or scissors.";
+function game(playerInput){
+    let compChoice = getRandomInt(1, 3);
+    const playerScore = 0;
+    const compScore = 0;
+    
+    console.log(compChoice);
+    if (playerInput === compChoice){
+        document.getElementById("result").innerText = "Tie!";
     }
-    playerSelection = playerSelection.toLowerCase();
-    if (playerSelection === computerSelection) {
-        return "It's a tie!";
-    } else if (
-        (playerSelection === "rock" && computerSelection === "scissors") ||
-        (playerSelection === "paper" && computerSelection === "rock") ||
-        (playerSelection === "scissors" && computerSelection === "paper")
-    ) {
-        return `You win! ${playerSelection} beats ${computerSelection}`;
-    } else {
-        return `You lose! ${computerSelection} beats ${playerSelection}`;
-    }
-}
-
-function game(playerSelection) {
-    let playerScore = 0;
-    let computerScore = 0;
-
-    for (let round = 1; round <= 5; round++) {
-        const computerSelection = computerPlay();
-        const result = playRound(playerSelection, computerSelection);
-        console.log(`Round ${round}: ${result}`);
-
-        document.getElementById("player-choice").innerText = "Your Choice: " + playerSelection;
-        document.getElementById("computer-choice").innerText = "Computer's Choice: " + computerSelection;
-
-        if (result.startsWith("You win")) {
-            playerScore++;
-            document.getElementById("player-score").innerText = "Your Score: " + playerScore;
-        } else if (result.startsWith("You lose")) {
-            computerScore++;
-            document.getElementById("computer-score").innerText = "Computer's Score: " + computerScore;
+    if (playerInput === 1 && compChoice === 3 ||
+        playerInput === 2 && compChoice == 1 ||
+        playerInput === 3 && compChoice === 2){
+            playerScore +1;
+            document.getElementById("player-score").innerText = "Your score: {playerScore}";
+            document.getElementById("result").innerText = "Player wins!"
         }
-    }
-
-    document.getElementById("result-message").innerText = `Final Score - You: ${playerScore}, Computer: ${computerScore}`; 
-    if (playerScore > computerScore) {
-        document.getElementById("result-message").innerText = "Congratulations! You are the overall winner!";
-    } else if (computerScore > playerScore) {
-        document.getElementById("result-message").innerText = "Sorry, the computer wins overall!";
-    } else {
-        document.getElementById("result-message").innerText = "It's an overall tie!";
-    }
+        else {
+            compScore +1;
+            document.getElementById("computer-score").innerText = "Computer score: {compScore}";
+            document.getElementById("result").innerText = "Computer wins!";
+        }
 }
