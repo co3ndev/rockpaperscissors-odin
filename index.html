@@ -8,19 +8,32 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <navigation>
-        <a href="index.html">Home</a>
-        <a href="game.html">Play Game</a>
-        <a href="about.html">About</a>
-    </navigation>
     <header>
-        <h1>Welcome to Rock, Paper, Scissors - Odin</h1>
+        <nav>
+            <h2>Welcome to Rock, Paper, Scissors</h2>
+            <a href="#">Home</a>
+            <a href="game.html">Play Game</a>
+        </nav>
     </header>
     <main>
-        <section>
+        <section id="about-section">
             <h2>About the Game</h2>
             <p>This is a simple implementation of the classic game Rock, Paper, Scissors.</p>
             <p>Click on "Play Game" in the navigation menu to start playing!</p>
+        </section>
+        <section id="game-section">
+            <h2>Play the Game</h2>
+            <div id="game-container">
+                <button id="rock-button" onclick="game(1)">Rock</button>
+                <button id="paper-button" onclick="game(2)">Paper</button>
+                <button id="scissors-button" onclick="game(3)">Scissors</button>
+            </div>
+            <div id="result-container">
+                <p id="result">Click a button above to choose!</p>
+                <p id="player-score">Your score: </p>
+                <p id="computer-score">Computer score: </p>
+            </div>
+
         </section>
     </main>
     <footer>
