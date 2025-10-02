@@ -12,7 +12,15 @@ let compScore = 0;
 function game(playerInput){
     let compChoice = getRandomInt(1, 3);
 
+    if (compScore === 5 || playerScore === 5){
+        compScore = 0;
+        playerScore = 0;
+        document.getElementById("computer-score").innerText = "Computer score: " + compScore;
+        document.getElementById("player-score").innerText = "Player score: " + playerScore;
+    }
+
     console.log(compChoice);
+
     if (playerInput === compChoice){
         document.getElementById("result").innerText = "Tie!";
     } else if (playerInput === 1 && compChoice === 3 ||
@@ -37,5 +45,12 @@ function game(playerInput){
         case 3:
             document.getElementById("computerplayed").innerText = "Computer played: Scissors";
             break;
+    }
+    if (compScore === 5){
+        document.getElementById("computerplayed").innerText = "Computer wins overall!";
+        document.getElementById("result").innerText = "Press any choice to play again."
+    } else if (playerScore === 5){
+        document.getElementById("computerplayed").innerText = "Computer wins overall!";
+        document.getElementById("result").innerText = "Press any choice to play again.!"
     }
 }
