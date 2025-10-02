@@ -7,6 +7,9 @@ function computerPlay() {
 }
 
 function playRound(playerSelection, computerSelection) {
+    if (!["rock", "paper", "scissors"].includes(playerSelection)) {
+        return "Invalid choice! Please select rock, paper, or scissors.";
+    }
     playerSelection = playerSelection.toLowerCase();
     if (playerSelection === computerSelection) {
         return "It's a tie!";
@@ -21,29 +24,33 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
+function game(playerSelection) {
     let playerScore = 0;
     let computerScore = 0;
 
     for (let round = 1; round <= 5; round++) {
-        const playerSelection = prompt("Enter rock, paper, or scissors:");
         const computerSelection = computerPlay();
         const result = playRound(playerSelection, computerSelection);
         console.log(`Round ${round}: ${result}`);
 
+        document.getElementById("player-choice").innerText = "Your Choice: " + playerSelection;
+        document.getElementById("computer-choice").innerText = "Computer's Choice: " + computerSelection;
+
         if (result.startsWith("You win")) {
             playerScore++;
+            document.getElementById("player-score").innerText = "Your Score: " + playerScore;
         } else if (result.startsWith("You lose")) {
             computerScore++;
+            document.getElementById("computer-score").innerText = "Computer's Score: " + computerScore;
         }
     }
 
-    console.log(`Final Score - You: ${playerScore}, Computer: ${computerScore}`);
+    document.getElementById("result-message").innerText = `Final Score - You: ${playerScore}, Computer: ${computerScore}`; 
     if (playerScore > computerScore) {
-        console.log("Congratulations! You are the overall winner!");
+        document.getElementById("result-message").innerText = "Congratulations! You are the overall winner!";
     } else if (computerScore > playerScore) {
-        console.log("Sorry! The computer is the overall winner!");
+        document.getElementById("result-message").innerText = "Sorry, the computer wins overall!";
     } else {
-        console.log("It's an overall tie!");
+        document.getElementById("result-message").innerText = "It's an overall tie!";
     }
 }
